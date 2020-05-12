@@ -1,58 +1,71 @@
 #include <iostream>
 #include <time.h>
-#include <string.h>
 
 using namespace std;
 
 int main()
 {
-	int man = 0, woman = 0, qdirectory = 11;
-	int questions[10];
-	string manq[10] = {"\n\tTe gustan los deportes de contacto?\n\t","\n\tTe gustaria ser como cr7 o messi?\n\t","\n\tprefieres ver un partido de tu equipo favorito antes que ver una serie?\n\t","\n\tPrefieres los gameplays sobre los tutoriales de belleza?\n\t","\n\tTe afeitas?\n\t","\n\tTe gustaria tener una buena barba?\n\t","\n\tTienes el cabello regularmente corto?\n\t","\n\tHas besado a una mujer en la boca?\n","\n\tTe has enamorado de una mujer?\n","\n\tTe gustaria estar super fuerte y con el abdomen marcado?\n\t"};
-	string womanq[10] = {"\n\tTe casarias con un vestido blanco?\n\t","\n\tSi tuvieses un bebe lo amamantarias?\n\t","\n\tUtlizarias un bolso de mano?\n\t","\n\tHas utilizado tacones en publico?\n\t","\n\tUtilizarias lapiz labial?\n\t","\n\tTe pintarias las unas?\n\t","\n\tHas utilizado un top?\n\t","\n\tHas hablado del chico que te gusta con tu mejor amiga?\n\t","\n\tPrefieres ver tu serie favorita antes que un partido de tu equipo favorito?\n\t","\n\tTe gusta usar maquillaje?\n\t"};
-	string answer;
+	int man = 0, woman = 0, qdirectory = 0, irand, modulo;
+	int questions[6];
+	string manq[6] = {"\n\tTe gustan los deportes de contacto?\n\t","\n\tTe gustaria ser como cr7 o messi?\n\t","\n\tprefieres ver un partido de tu equipo favorito antes que ver una serie?\n\t","\n\tPrefieres los gameplays sobre los tutoriales de belleza?\n\t","\n\tTe afeitas?\n\t","\n\tTe gustaria tener una buena barba?\n\t"};
+	string womanq[6] = {"\n\tTe casarias con un vestido blanco?\n\t","\n\tSi tuvieses un bebe lo amamantarias?\n\t","\n\tUtlizarias un bolso de mano?\n\t","\n\tHas utilizado tacones en publico?\n\t","\n\tUtilizarias lapiz labial?\n\t","\n\tTe pintarias las unas?\n\t"};
+	char answer;
 
 	cout << "Bienvenido! intentare adivinar tu genero basandome\nen una serie de preguntas de si o no\n\t\n\t" << endl;
+	
 	while(woman < 6 && man < 6)
 	{
+		cout << "Responde con s para si, n para no" << endl;
 		srand(time(NULL));
 
-		for(int i = 0; i < 9; i++)
-		{
-			qdirectory = rand() % 9;
+		irand = rand();
 
-			if(qdirectory == questions[i])
-			{
-				qdirectory = rand() % 10;
-			}
-		}
-		
+		modulo = irand % 2;
 
-		if(rand() % 2 == 0)
+
+		if(modulo == 0)
 		{
 			cout << manq[qdirectory] << endl;
 			cin >> answer;
-			if(strcmp(answer, "si") == 0)
+			switch (answer)
 			{
-				man++;
-			}else if(strcmp(answer, "no" == 0))
-			{
-				woman++;
+			case 's': man++;
+				break;
+			case 'n': woman++;
+				break;
+			default: cout << "valor incorrecto" << endl;
+				break;
 			}
 		}
 		else
 		{
-			cout << manq[qdirectory] << endl;
+			cout << womanq[qdirectory] << endl;
 			cin >> answer;
-			/*if(answer == "no")
+			switch (answer)
 			{
-				man++;
-			}else if(answer == "si")
-			{
-				woman++;
-			}*/
+			case 's': woman++;
+				break;
+			case 'n': man++;
+				break;
+			default: cout << "valor incorrecto" << endl;
+				break;
+			}
 		}
+		qdirectory++;
 	}
+
+	if(woman > man)
+	{
+		cout << "Usted es mujer" << endl;
+	}
+	else
+	{
+		cout << "usted es hombre" <<endl;
+	}
+
+	//cout << man << endl;
+	//cout << woman << endl;
+	
 
 	return 0;
 }
